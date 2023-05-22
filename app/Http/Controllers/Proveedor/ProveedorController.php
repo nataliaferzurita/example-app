@@ -54,7 +54,7 @@ class ProveedorController extends Controller
         $table->save();
 
 
-        return dd($request->all());
+        return $request->all();
     }
 
     /**
@@ -86,6 +86,10 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedor)
     {
-        return dd($proveedor);
+        echo $proveedor->forceDelete();
+        
+        //Proveedor::destroy($proveedor);
+        
+
     }
 }
