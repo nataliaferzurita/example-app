@@ -1,41 +1,68 @@
-@extends('adminlte::page')
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><strong>Nuevo Proveedor</strong></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{{route('proveedores.store')}}" method="post">
+        @csrf @method('POST')
+        <div class="modal-body">
+          <div class="row form-group">
+            <div class="col-4">
+              <label for="cuit_proveedor" class="form-label">CUIT:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="cuit_proveedor" name="cuit_proveedor">
+            </div> 
+          </div>
+          <div class="row form-group">
+            <div class="col-4">
+              <label for="razonSocial_proveedor" class="form-label">Razon Social:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="razonSocial_proveedor" name="razonSocial_proveedor">
+            </div> 
+          </div>
+          <div class="row form-group">
+            <div class="col-4">
+              <label for="nombreFantasia_proveedor" class="form-label">Nombre Fantasia:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="nombreFantasia_proveedor" name="nombreFantasia_proveedor">
+            </div> 
+          </div>
+          <div class="row form-group">
+            <div class="col-4"><label for="codigoPostal_proveedor">Codigo Postal:</label></div>
+            <div class="col-8"><input type="text" class="form-control" id="codigoPostal_proveedor" name="codigoPostal_proveedor"></div>
+          </div>
+          <div class="row form-group">
+            <div class="col-4">
+              <label for="domicilio_proveedor" class="form-label">Domicilio:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="domicilio_proveedor" name="domicilio_proveedor">
+            </div>
+          </div>
 
-@section('title', 'Dashboard')
+          <div class="row form-group">
+            <div class="col-4">
+              <label for="telefono_proveedor" class="form-label">Telefono:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" id="telefono_proveedor" name="telefono_proveedor">
+            </div>
+          </div>
 
-@section('content_header')
-    <h1>Datos Proveedor</h1>
-@stop
-
-@section('content')
-<div class="card mr-3 ml-3">
-  <div class="card-header">Nuevo Proveedor</div>
-
-  <div class="card-body">
-    <form action="{{route('proveedores.store')}}" method="POST">
-      @csrf
-      @livewire('selects')   
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Save changes</button>
-    </form>
+        </div>
       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+      
+      </div>
+    </form>
+    </div>
   </div>
-
+  
 </div>
-
-
-
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-<script>
-       
-  $('.js-example-basic-single').select2();
- 
-</script>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-@stop
-

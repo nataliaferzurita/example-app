@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <title>Document</title>
-</head>
-<body>
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
+<div class="modal fade" id="showModal{{$proveedor->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{$proveedor->razonSocial_proveedor}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6"><label for="cuit_proveedor">CUIT:</label></div>
+          <div class="col-6"><label for="cuit" id="cuit">{{$proveedor->cuit_proveedor}}</label></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><label for="razonSocial_proveedor">Razón Social:</label></div>
+          <div class="col-6"><label for="razonSocial">{{$proveedor->razonSocial_proveedor}}</label></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><label for="nombreFantasia_proveedor">Nombre Fantasía:</label></div>
+          <div class="col-6"><label for="nombreFantasia">{{$proveedor->nombreFantasia_proveedor}}</label></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><label for="codigoPostal_proveedor">Codigo Postal:</label></div>
+          <div class="col-6"><label for="codigoPostal">{{$proveedor->codigoPostal_proveedor}}</label></div>
+        </div>
+        
+        <div class="row">
+          <div class="col-6"><label for="direccion_proveedor">Direccion:</label></div>
+          <div class="col-6"><label for="direccion">{{$proveedor->direccion_proveedor}}</label></div>
+        </div>
+        <div class="row">
+          <div class="col-6"><label for="telefono_proveedor">Telefono:</label></div>
+          <div class="col-6"><label for="telefono">{{$proveedor->telefono_proveedor}}</label></div>
         </div>
       </div>
-</body>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div> 
+    </div>
+  </div>
+</div>
 
-</html>
-
-  

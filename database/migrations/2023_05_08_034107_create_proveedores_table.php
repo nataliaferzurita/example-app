@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('codigoPostal_proveedor',10);
             $table->string('direccion_proveedor',100);
             $table->string('telefono_proveedor',100);
-            $table->boolean(true);
+            $table->boolean('visible_proveedor',true);
             $table->string('_token');
             $table->timestamps();
         });
