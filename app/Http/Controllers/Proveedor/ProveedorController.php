@@ -5,17 +5,23 @@ namespace App\Http\Controllers\Proveedor;
 use App\Http\Controllers\Controller;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use App\Http\Livewire;
+
+
 
 
 class ProveedorController extends Controller
 {
+    public $countries, $token,$states=NULL,$cities=NULL,$selected_country=NULL,$selected_state=NULL;
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+        
         $proveedores=Proveedor::all();
-        return view("proveedores.index",['proveedores'=> $proveedores]);
+        return view("proveedores.index",compact('proveedores'));
     }
 
     /**
@@ -32,31 +38,28 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
 
+       
         
+
         //Proveedor::created($request->all());
 
-        $request->validate(
-            [
-                'cuit_proveedor'=>'unique:proveedores|min:11|max:11'
-                
-
-            ]
-            );
-
+       
         $table=new Proveedor();
-        $table->cuit_proveedor=$request->input('cuit', '27401137918');
-        $table->razonSocial_proveedor=$request->input('razonSocial', 'Natalia Fernanda Zurita');
-        $table->nombreFantasia_proveedor=$request->input('nombreFantasia', 'Natalia');
-        $table->codigoPostal_proveedor=$request->input('codigoPostal', '4400');
-        $table->direccion_proveedor=$request->input('direccion', 'Belgrano 498, Salta-Capital');
-        $table->telefono_proveedor=$request->input('telefono', '3874199537');
+        $table->cuit_proveedor=$request->input('cuit_proveedor');
+        $table->razonSocial_proveedor=$request->input('razonSocial_proveedor');
+        $table->nombreFantasia_proveedor=$request->input('nombreFantasia_proveedor');
+        $table->codigoPostal_proveedor=$request->input('codigoPostal_proveedor', '4400');
+        $table->direccion_proveedor=$request->input('domicilio_proveedor');
+        $table->telefono_proveedor=$request->input('telefono_proveedor');
         $table->_token=$request['_token'];
         $table->save();
 
-
-        return $request->all();
+        /*Generated Token : CfNNPNDSr4RK6Y-dyfhlBadJ7FVjGK-_nG3kDxOTbOM8Uq7V3UNybw-HuC9hNvwIQ-g*/ 
+        $proveedores=Proveedor::all();
+        return view('proveedores.index',compact('proveedores'));
+        
     }
-
+        
     /**
      * Display the specified resource.
      */
@@ -86,9 +89,9 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedor)
     {
-        echo $proveedor->forceDelete();
-        
-        //Proveedor::destroy($proveedor);
+        $proveedor->delete();
+        $proveedores=Proveedor::all();
+        return view('proveedores.index',compact('proveedores'));
         
 
     }
