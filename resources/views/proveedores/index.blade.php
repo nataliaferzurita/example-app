@@ -56,13 +56,17 @@
                   </button>
                   @include('proveedores.show',$proveedor)
                 </td>
+                <td> 
+                  <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{$proveedor->id}}">
+                    Actualizar
+                  </button>
+                  @include('proveedores.update',$proveedor)
+                </td>
                 <td>
-                  
-                    <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal{{$proveedor->id}}">
-                      Actualizar
-                    </button>
-                    @include('proveedores.update',$proveedor)
-                  
+                  <form action="{{route('proveedores.destroy',$proveedor->id)}}" method="POST">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
                   
                 </td>
                 

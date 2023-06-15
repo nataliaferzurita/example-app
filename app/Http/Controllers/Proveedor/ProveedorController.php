@@ -20,7 +20,7 @@ class ProveedorController extends Controller
     public function index()
     {   
         
-        $proveedores=Proveedor::all();
+        $proveedores=Proveedor::where('visible_proveedor',1)->get();
         return view("proveedores.index",compact('proveedores'));
     }
 
@@ -38,6 +38,7 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
 
+        
         $table=new Proveedor();
         $table->cuit_proveedor=$request->input('cuit_proveedor');
         $table->razonSocial_proveedor=strtoupper($request->input('razonSocial_proveedor'));
@@ -45,13 +46,12 @@ class ProveedorController extends Controller
         $table->codigoPostal_proveedor=$request->input('codigoPostal_proveedor', '4400');
         $table->direccion_proveedor=strtoupper($request->input('domicilio_proveedor'));
         $table->telefono_proveedor=$request->input('telefono_proveedor');
-        $table->_token=$request['_token'];
         $table->visible_proveedor=true;
         $table->save();
 
         /*Generated Token : CfNNPNDSr4RK6Y-dyfhlBadJ7FVjGK-_nG3kDxOTbOM8Uq7V3UNybw-HuC9hNvwIQ-g*/ 
-        $proveedores=Proveedor::all();
-        $proveedores->where('visible_proveedor',true);
+        $proveedores=Proveedor::where('visible_proveedor',1);
+     
         return redirect()->route('proveedores.index',compact('proveedores'));
         
     }
@@ -76,20 +76,20 @@ class ProveedorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Proveedor $proveedor)
+    public function update(Request $request,$proveedor_id)
     {
-        $old=Proveedor::find(1);
-        $old->cuit_proveedor= $old->cuit_proveedor;
-        $old->razonSocial_proveedor=strtoupper($request->razonSocial_proveedor);
-        $old->nombreFantasia_proveedor=strtoupper($request->nombreFantasia_proveedor);
-        $old->codigoPostal_proveedor=$request->codigoPostal_proveedor;
-        $old->direccion_proveedor=strtoupper($request->domicilio_proveedor);
-        $old->telefono_proveedor=$request->telefono_proveedor;
-        $old->_token=$request['_token'];
-        $old->visible_proveedor=true;
-        dd($proveedor->all());
-        $proveedor->save();
-    
+        $proveedor=Proveedor::findOrFail($proveedor_id);
+      
+        $proveedor->update([
+            'cuit_proveedor'=>$request->cuit_proveedor,
+            'razonSocial_proveedor'=>strtoupper($request->razonSocial_proveedor),
+            'nombreFantasia_proveedor'=>strtoupper($request->nombreFantasia_proveedor),
+            'codigoPostal_proveedor'=>$request->codigoPostal_proveedor,
+            'direccion_proveedor'=>strtoupper($request->domicilio_proveedor),
+            'telefono_proveedor'=>$request->telefono_proveedor,
+        ]);
+        
+        $proveedores=Proveedor::where('visible_proveedor',1)->get();
         return redirect()->route('proveedores.index',compact('proveedores'));
         
         
@@ -99,10 +99,17 @@ class ProveedorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Proveedor $proveedor)
+    public function destroy($proveedor_id)
     {
-        echo "hola";
-        echo $proveedor->visible_proveedor;
-
-    }
+        $proveedor=Proveedor::findOrFail($proveedor_id);
+        $proveedor->update([
+            
+            'visible_proveedor'=>false
+        ]);
+        
+        $proveedores=Proveedor::where('visible_proveedor',true)->get();
+        return redirect()->route('proveedores.index',compact('proveedores'));
+       
+    }  
+        
 }

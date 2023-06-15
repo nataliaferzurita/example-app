@@ -2,11 +2,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><strong></strong></h5>
+        <h5 class="modal-title" id="exampleModalLabel"><strong>Actualizar Datos Proveedor</strong></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="{{route('proveedores.update',$proveedor)}}" method="post">
-        @csrf @method('PUT')
+      
+      <form action="{{route('proveedores.update',$proveedor->id)}}" method="post">
+        
+        @csrf 
+        @method('PUT')
         <div class="modal-body">
           <div class="row form-group">
             <div class="col-4">
